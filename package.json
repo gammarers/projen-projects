@@ -48,6 +48,9 @@
     "ts-node": "^10.9.2",
     "typescript": "6.0.x"
   },
+  "dependencies": {
+    "projen": "^0.101.26"
+  },
   "engines": {
     "node": ">= 20.0.0"
   },

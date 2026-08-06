@@ -8,6 +8,9 @@ const project = new typescript.TypeScriptProject({
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repository: 'https://github.com/gammarers/projen-project-types.git',
+  deps: [
+    'projen',
+  ],
   releaseToNpm: false,
   npmTrustedPublishing: false,
   npmAccess: javascript.NpmAccess.PUBLIC,
