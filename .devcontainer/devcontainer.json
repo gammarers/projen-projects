@@ -1,5 +1,5 @@
 {
-  "name": "dev-projen-project-types",
+  "name": "dev-projen-projects",
   "image": "mcr.microsoft.com/devcontainers/base:trixie",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {

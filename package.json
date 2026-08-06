@@ -1,5 +1,5 @@
 {
-  "name": "@gammarers/projen-aws-cdk-construct",
+  "name": "@gammarers/projen-projects",
   "repository": {
     "type": "git",
     "url": "https://github.com/gammarers/projen-project-types.git"

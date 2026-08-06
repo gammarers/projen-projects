@@ -4,7 +4,7 @@ const project = new typescript.TypeScriptProject({
   authorEmail: 'yicr@users.noreply.github.com',
   typescriptVersion: '6.0.x',
   defaultReleaseBranch: 'main',
-  name: '@gammarers/projen-aws-cdk-construct',
+  name: '@gammarers/projen-projects',
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
   repository: 'https://github.com/gammarers/projen-project-types.git',
