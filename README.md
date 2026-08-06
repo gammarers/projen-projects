@@ -1,0 +1,1 @@
+# projen-project-types
