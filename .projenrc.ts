@@ -1,14 +1,13 @@
-import { cdk, javascript, github } from 'projen';
-const project = new cdk.JsiiProject({
-  author: 'yicr',
-  authorAddress: 'yicr@users.noreply.github.com',
-  defaultReleaseBranch: 'main',
+import { javascript, github, typescript } from 'projen';
+const project = new typescript.TypeScriptProject({
+  authorName: 'yicr',
+  authorEmail: 'yicr@users.noreply.github.com',
   typescriptVersion: '6.0.x',
-  jsiiVersion: '6.0.x',
+  defaultReleaseBranch: 'main',
   name: '@gammarers/projen-aws-cdk-construct',
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/gammarers/projen-project-types.git',
+  repository: 'https://github.com/gammarers/projen-project-types.git',
   releaseToNpm: false,
   npmTrustedPublishing: false,
   npmAccess: javascript.NpmAccess.PUBLIC,

@@ -100,21 +100,15 @@
       ],
       "condition": "git diff --exit-code > /dev/null"
     },
-    "compat": {
-      "name": "compat",
-      "description": "Perform API compatibility check against latest version",
-      "steps": [
-        {
-          "exec": "jsii-diff npm:$(node -p \"require('./package.json').name\") -k --ignore-file .compatignore || (echo \"\nUNEXPECTED BREAKING CHANGES: add keys such as 'removed:constructs.Node.of' to .compatignore to skip.\n\" && exit 1)"
-        }
-      ]
-    },
     "compile": {
       "name": "compile",
       "description": "Only compile",
       "steps": [
         {
-          "exec": "jsii --silence-warnings=reserved-word"
+          "execArgs": [
+            "tsc",
+            "--build"
+          ]
         }
       ]
     },
@@ -128,19 +122,6 @@
             "--project",
             "projenrc/tsconfig.json",
             ".projenrc.ts"
-          ]
-        }
-      ]
-    },
-    "docgen": {
-      "name": "docgen",
-      "description": "Generate API.md from .jsii manifest",
-      "steps": [
-        {
-          "execArgs": [
-            "jsii-docgen",
-            "-o",
-            "API.md"
           ]
         }
       ]
@@ -194,46 +175,25 @@
       "description": "Creates the distribution package",
       "steps": [
         {
-          "spawn": "package:js",
-          "condition": "node -e \"if (!process.env.CI) process.exit(1)\""
+          "execArgs": [
+            "mkdir",
+            "-p",
+            "dist/js"
+          ]
         },
         {
-          "spawn": "package-all",
-          "condition": "node -e \"if (process.env.CI) process.exit(1)\""
-        }
-      ]
-    },
-    "package-all": {
-      "name": "package-all",
-      "description": "Packages artifacts for all target languages",
-      "steps": [
-        {
-          "spawn": "package:js"
-        }
-      ]
-    },
-    "package:js": {
-      "name": "package:js",
-      "description": "Create js language bindings",
-      "steps": [
-        {
           "execArgs": [
-            "jsii-pacmak",
-            "-v",
-            "--target",
-            "js"
+            "npm",
+            "pack",
+            "--pack-destination",
+            "dist/js"
           ]
         }
       ]
     },
     "post-compile": {
       "name": "post-compile",
-      "description": "Runs after successful compilation",
-      "steps": [
-        {
-          "spawn": "docgen"
-        }
-      ]
+      "description": "Runs after successful compilation"
     },
     "post-upgrade": {
       "name": "post-upgrade",
@@ -322,7 +282,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,jsii-diff,jsii-pacmak,projen,ts-jest,ts-node"
+            "--filter=@types/jest,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node"
           ]
         },
         {
@@ -344,11 +304,6 @@
             "eslint",
             "jest",
             "jest-junit",
-            "jsii-diff",
-            "jsii-docgen",
-            "jsii-pacmak",
-            "jsii-rosetta",
-            "jsii",
             "projen",
             "ts-jest",
             "ts-node",
@@ -368,7 +323,11 @@
       "description": "Watch & compile in the background",
       "steps": [
         {
-          "exec": "jsii -w --silence-warnings=reserved-word"
+          "execArgs": [
+            "tsc",
+            "--build",
+            "-w"
+          ]
         }
       ]
     }
