@@ -7,7 +7,7 @@ const project = new typescript.TypeScriptProject({
   name: '@gammarers/projen-projects',
   packageManager: javascript.NodePackageManager.NPM,
   projenrcTs: true,
-  repository: 'https://github.com/gammarers/projen-project-types.git',
+  repository: 'https://github.com/gammarers/projen-projects.git',
   deps: [
     'projen',
   ],

@@ -2,7 +2,7 @@
   "name": "@gammarers/projen-projects",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gammarers/projen-project-types.git"
+    "url": "https://github.com/gammarers/projen-projects.git"
   },
   "scripts": {
     "build": "projen build",
