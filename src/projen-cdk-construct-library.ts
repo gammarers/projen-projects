@@ -45,6 +45,7 @@ export class ProjenCdkConstructLibrary extends awscdk.AwsCdkConstructLibrary {
     const { repository, repositoryUrl, ...rest } = options;
 
     super({
+      projenrcTs: true,
       author: 'yicr',
       authorAddress: 'yicr@users.noreply.github.com',
       defaultReleaseBranch: 'main',
