@@ -11,7 +11,7 @@ const project = new typescript.TypeScriptProject({
   deps: [
     'projen',
   ],
-  releaseToNpm: false,
+  releaseToNpm: true,
   npmTrustedPublishing: false,
   npmAccess: javascript.NpmAccess.PUBLIC,
   minNodeVersion: '20.0.0',
