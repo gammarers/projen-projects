@@ -4,14 +4,15 @@
 [![NpmPackageVersion](https://img.shields.io/npm/v/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
 [![NpmPackageDownloads](https://img.shields.io/npm/dt/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
 
-Opinionated [projen](https://projen.io/) project types for AWS CDK construct libraries.
+Opinionated [projen](https://projen.io/) project types for AWS CDK construct libraries and TypeScript packages.
 
 ## Features
 
 - `ProjenCdkConstructLibrary` — an `AwsCdkConstructLibrary` wrapper with shared defaults
-- Requires only `name`, `repository`, and `cdkVersion` to get started
-- Defaults `repositoryUrl` from `repository` when omitted
-- Shared author, Node (`>= 20`), TypeScript (`6.0.x`), and jsii (`6.0.x`) settings
+- `ProjenTypeScriptProject` — a `TypeScriptProject` wrapper with the same shared defaults
+- Requires only `name` and `repository` to get started (`cdkVersion` is also required for CDK libraries)
+- Defaults `repositoryUrl` from `repository` when omitted (CDK libraries)
+- Shared author, Node (`>= 20`), TypeScript (`6.0.x`), and jsii (`6.0.x`, CDK libraries) settings
 - GitHub App credentials for workflow authentication
 - Weekly dependency upgrades with auto-approve / auto-merge labels
 - Generates a consistent `.editorconfig`
@@ -46,6 +47,19 @@ const project = new ProjenCdkConstructLibrary({
 project.synth();
 ```
 
+Or use `ProjenTypeScriptProject` for a TypeScript package:
+
+```ts
+import { ProjenTypeScriptProject } from '@gammarers/projen-projects';
+
+const project = new ProjenTypeScriptProject({
+  name: '@example/my-typescript-project',
+  repository: 'https://github.com/example/my-typescript-project.git',
+});
+
+project.synth();
+```
+
 Then generate the project files:
 
 ```bash
@@ -72,6 +86,18 @@ Optional highlights:
 
 Built-in defaults include author `yicr`, npm as the package manager, `releaseToNpm: false`,
 public npm access, workflow Node `24.x`, and GitHub App-based projen credentials.
+
+`ProjenTypeScriptProject` accepts `ProjenTypeScriptProjectOptions`, which extends
+`TypeScriptProjectOptions` (most fields optional) while requiring the following:
+
+| Option | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | Yes | Package name |
+| `repository` | `string` | Yes | Repository URL |
+
+Other `TypeScriptProject` options are passed through and can override the built-in defaults.
+The same author, Node, TypeScript, npm, and GitHub App defaults as `ProjenCdkConstructLibrary`
+apply (`jsiiVersion` is not set because this type is not a jsii project).
 
 ## Requirements
 
