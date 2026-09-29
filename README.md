@@ -1,8 +1,9 @@
-# @gammarers/projen-projects
+# Projen Projects
 
-[![NpmPackageLicense](https://img.shields.io/npm/l/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
-[![NpmPackageVersion](https://img.shields.io/npm/v/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
-[![NpmPackageDownloads](https://img.shields.io/npm/dt/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![npm version](https://img.shields.io/npm/v/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![license](https://img.shields.io/npm/l/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![Node.js](https://img.shields.io/node/v/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![build](https://img.shields.io/github/actions/workflow/status/gammarers/projen-projects/build.yml?label=build&style=flat-square)](https://github.com/gammarers/projen-projects/actions/workflows/build.yml)
 
 Opinionated [projen](https://projen.io/) project types for AWS CDK construct libraries and TypeScript packages.
 
@@ -10,8 +11,7 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 
 - `ProjenCdkConstructLibrary` — an `AwsCdkConstructLibrary` wrapper with shared defaults
 - `ProjenTypeScriptProject` — a `TypeScriptProject` wrapper with the same shared defaults
-- Requires only `name` and `repository` to get started (`cdkVersion` is also required for CDK libraries)
-- Defaults `repositoryUrl` from `repository` when omitted (CDK libraries)
+- Requires only `name` and `repositoryUrl` to get started (`cdkVersion` is also required for CDK libraries)
 - Shared author, Node (`>= 20`), TypeScript (`6.0.x`), and jsii (`6.0.x`, CDK libraries) settings
 - GitHub App credentials for workflow authentication
 - Weekly dependency upgrades with auto-approve / auto-merge labels
@@ -19,16 +19,22 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 
 ## Installation
 
-npm:
+### npm
 
 ```bash
 npm install @gammarers/projen-projects
 ```
 
-yarn:
+### yarn
 
 ```bash
 yarn add @gammarers/projen-projects
+```
+
+### pnpm
+
+```bash
+pnpm add @gammarers/projen-projects
 ```
 
 ## Usage
@@ -40,7 +46,7 @@ import { ProjenCdkConstructLibrary } from '@gammarers/projen-projects';
 
 const project = new ProjenCdkConstructLibrary({
   name: '@example/my-cdk-construct',
-  repository: 'https://github.com/example/my-cdk-construct.git',
+  repositoryUrl: 'https://github.com/example/my-cdk-construct.git',
   cdkVersion: '2.170.0',
 });
 
@@ -54,7 +60,7 @@ import { ProjenTypeScriptProject } from '@gammarers/projen-projects';
 
 const project = new ProjenTypeScriptProject({
   name: '@example/my-typescript-project',
-  repository: 'https://github.com/example/my-typescript-project.git',
+  repositoryUrl: 'https://github.com/example/my-typescript-project.git',
 });
 
 project.synth();
@@ -74,14 +80,13 @@ npx projen
 | Option | Type | Required | Description |
 | --- | --- | --- | --- |
 | `name` | `string` | Yes | Package name |
-| `repository` | `string` | Yes | Repository URL (also used as the default for `repositoryUrl`) |
+| `repositoryUrl` | `string` | Yes | Git repository URL (jsii derives `repository` from this value) |
 | `cdkVersion` | `string` | Yes | AWS CDK version |
 
 Optional highlights:
 
 | Option | Description |
 | --- | --- |
-| `repositoryUrl` | Jsii repository URL; defaults to `repository` when omitted |
 | Other `AwsCdkConstructLibrary` options | Passed through and can override the built-in defaults |
 
 Built-in defaults include author `yicr`, npm as the package manager, `releaseToNpm: false`,
@@ -93,7 +98,7 @@ public npm access, workflow Node `24.x`, and GitHub App-based projen credentials
 | Option | Type | Required | Description |
 | --- | --- | --- | --- |
 | `name` | `string` | Yes | Package name |
-| `repository` | `string` | Yes | Repository URL |
+| `repositoryUrl` | `string` | Yes | Git repository URL (passed through as projen's `repository`) |
 
 Other `TypeScriptProject` options are passed through and can override the built-in defaults.
 The same author, Node, TypeScript, npm, and GitHub App defaults as `ProjenCdkConstructLibrary`
@@ -102,7 +107,6 @@ apply (`jsiiVersion` is not set because this type is not a jsii project).
 ## Requirements
 
 - Node.js `>= 20.0.0`
-- [projen](https://www.npmjs.com/package/projen)
 
 ## License
 

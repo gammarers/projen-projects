@@ -10,7 +10,7 @@ describe('ProjenTypeScriptProject', () => {
   test('synthesizes with required options', () => {
     const project = new ProjenTypeScriptProject({
       name: 'test-typescript-project',
-      repository: 'https://github.com/example/test-typescript-project.git',
+      repositoryUrl: 'https://github.com/example/test-typescript-project.git',
       outdir: createOutdir(),
     });
 
@@ -30,7 +30,7 @@ describe('ProjenTypeScriptProject', () => {
   test('uses authorName when explicitly provided', () => {
     const project = new ProjenTypeScriptProject({
       name: 'test-typescript-project',
-      repository: 'https://github.com/example/test-typescript-project.git',
+      repositoryUrl: 'https://github.com/example/test-typescript-project.git',
       authorName: 'override-author',
       outdir: createOutdir(),
     });

@@ -7,10 +7,10 @@ import { ProjenCdkConstructLibrary } from '../src';
 const createOutdir = () => fs.mkdtempSync(path.join(os.tmpdir(), 'projen-cdk-construct-library-'));
 
 describe('ProjenCdkConstructLibrary', () => {
-  test('synthesizes with required options and defaults repositoryUrl from repository', () => {
+  test('synthesizes with required options', () => {
     const project = new ProjenCdkConstructLibrary({
       name: 'test-construct',
-      repository: 'https://github.com/example/test-construct.git',
+      repositoryUrl: 'https://github.com/example/test-construct.git',
       cdkVersion: '2.170.0',
       outdir: createOutdir(),
     });
@@ -28,19 +28,17 @@ describe('ProjenCdkConstructLibrary', () => {
     expect(snapshot['.editorconfig']).toContain('max_line_length=120');
   });
 
-  test('uses repositoryUrl when explicitly provided', () => {
+  test('uses author when explicitly provided', () => {
     const project = new ProjenCdkConstructLibrary({
       name: 'test-construct',
-      repository: 'https://github.com/example/test-construct.git',
-      repositoryUrl: 'https://github.com/example/override.git',
+      repositoryUrl: 'https://github.com/example/test-construct.git',
       cdkVersion: '2.170.0',
+      author: 'override-author',
       outdir: createOutdir(),
     });
 
     const snapshot = Testing.synth(project);
 
-    expect(snapshot['package.json'].repository.url).toBe(
-      'https://github.com/example/override.git',
-    );
+    expect(snapshot['package.json'].author.name).toBe('override-author');
   });
 });
