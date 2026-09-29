@@ -1,5 +1,5 @@
 import { awscdk } from 'projen';
-import { addEditorConfig, createSharedTypeScriptProjectDefaults, sharedAuthor } from './shared-project-defaults';
+import { addEditorConfig, createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
 
 // export const PROJEN_VERSION = "~0.91.1";
 

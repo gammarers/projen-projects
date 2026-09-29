@@ -54,7 +54,7 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
   autoApproveOptions: {
     allowedUsernames: [
       'gammarers-projen-upgrade-bot[bot]',
-      'yicr',
+      sharedAuthor.name,
     ],
   },
 });

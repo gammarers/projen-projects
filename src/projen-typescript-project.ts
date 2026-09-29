@@ -1,5 +1,5 @@
 import { typescript } from 'projen';
-import { addEditorConfig, createSharedTypeScriptProjectDefaults, sharedAuthor } from './shared-project-defaults';
+import { addEditorConfig, createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
 
 /**
  * Options for {@link ProjenTypeScriptProject}.
