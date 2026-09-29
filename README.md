@@ -1,8 +1,9 @@
-# @gammarers/projen-projects
+# Projen Projects
 
-[![NpmPackageLicense](https://img.shields.io/npm/l/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
-[![NpmPackageVersion](https://img.shields.io/npm/v/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
-[![NpmPackageDownloads](https://img.shields.io/npm/dt/@gammarers/projen-projects)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![npm version](https://img.shields.io/npm/v/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![license](https://img.shields.io/npm/l/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![Node.js](https://img.shields.io/node/v/@gammarers/projen-projects?style=flat-square)](https://www.npmjs.com/package/@gammarers/projen-projects)
+[![build](https://img.shields.io/github/actions/workflow/status/gammarers/projen-projects/build.yml?label=build&style=flat-square)](https://github.com/gammarers/projen-projects/actions/workflows/build.yml)
 
 Opinionated [projen](https://projen.io/) project types for AWS CDK construct libraries and TypeScript packages.
 
@@ -18,16 +19,22 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 
 ## Installation
 
-npm:
+### npm
 
 ```bash
 npm install @gammarers/projen-projects
 ```
 
-yarn:
+### yarn
 
 ```bash
 yarn add @gammarers/projen-projects
+```
+
+### pnpm
+
+```bash
+pnpm add @gammarers/projen-projects
 ```
 
 ## Usage
@@ -100,7 +107,6 @@ apply (`jsiiVersion` is not set because this type is not a jsii project).
 ## Requirements
 
 - Node.js `>= 20.0.0`
-- [projen](https://www.npmjs.com/package/projen)
 
 ## License
 
