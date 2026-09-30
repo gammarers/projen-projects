@@ -26,6 +26,15 @@ describe('ProjenCdkConstructLibrary', () => {
     expect(snapshot['package.json'].engines.node).toBe('>= 20.0.0');
     expect(snapshot['.editorconfig']).toContain('indent_size=2');
     expect(snapshot['.editorconfig']).toContain('max_line_length=120');
+    expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-construct');
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toEqual({});
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/python:1']).toEqual({});
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/java:1']).toEqual({});
+    expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toBe(
+      'sudo chown -R $(whoami): /workspace && npm ci',
+    );
+    expect(snapshot['.devcontainer.json']).toBeUndefined();
+    expect(snapshot['.npmignore']).toContain('/.devcontainer');
   });
 
   test('uses author when explicitly provided', () => {

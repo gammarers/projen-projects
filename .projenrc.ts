@@ -1,4 +1,5 @@
 import { javascript, github, typescript } from 'projen';
+import { addDevContainer } from './src/core/devcontainer';
 const project = new typescript.TypeScriptProject({
   authorName: 'yicr',
   authorEmail: 'yicr@users.noreply.github.com',
@@ -53,5 +54,5 @@ project.eslint?.addRules({
     ignoreStrings: true,
   }],
 });
-project.addPackageIgnore('/.devcontainer');
+addDevContainer(project);
 project.synth();

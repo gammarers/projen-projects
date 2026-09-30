@@ -1,5 +1,7 @@
 import { typescript } from 'projen';
-import { addEditorConfig, createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
+import { addDevContainer } from './core/devcontainer';
+import { addEditorConfig } from './core/editor-config';
+import { createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
 
 /**
  * Options for {@link ProjenTypeScriptProject}.
@@ -24,7 +26,7 @@ export interface ProjenTypeScriptProjectOptions extends Partial<
 
 /**
  * A projen project type for TypeScript packages with shared defaults
- * such as author, Node versions, GitHub app credentials, and EditorConfig.
+ * such as author, Node versions, GitHub app credentials, EditorConfig, and a Dev Container.
  */
 export class ProjenTypeScriptProject extends typescript.TypeScriptProject {
 
@@ -42,8 +44,10 @@ export class ProjenTypeScriptProject extends typescript.TypeScriptProject {
       authorEmail: sharedAuthor.email,
       ...rest,
       repository: repositoryUrl,
+      devContainer: false,
     });
 
     addEditorConfig(this);
+    addDevContainer(this);
   }
 }
