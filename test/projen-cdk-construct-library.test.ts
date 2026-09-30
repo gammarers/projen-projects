@@ -26,6 +26,11 @@ describe('ProjenCdkConstructLibrary', () => {
     expect(snapshot['package.json'].engines.node).toBe('>= 20.0.0');
     expect(snapshot['.editorconfig']).toContain('indent_size=2');
     expect(snapshot['.editorconfig']).toContain('max_line_length=120');
+    expect(snapshot['.eslintrc.json'].rules['max-len']).toEqual(['error', {
+      code: 120,
+      ignoreUrls: true,
+      ignoreStrings: true,
+    }]);
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-construct');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toEqual({});
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/python:1']).toEqual({});

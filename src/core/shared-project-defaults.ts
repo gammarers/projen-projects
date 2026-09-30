@@ -18,6 +18,11 @@ export const sharedAuthor = {
 } as const;
 
 /**
+ * Maximum line length shared by EditorConfig and ESLint.
+ */
+export const sharedMaxLineLength = 120;
+
+/**
  * Node.js versions shared by CI workflows and the Dev Container.
  *
  * `workflow` is the GitHub Actions `node-version` (`24.x`).

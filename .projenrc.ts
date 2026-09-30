@@ -1,5 +1,6 @@
 import { javascript, github, typescript } from 'projen';
 import { addDevContainer } from './src/core/devcontainer';
+import { addEslintConfig } from './src/core/eslint-config';
 const project = new typescript.TypeScriptProject({
   authorName: 'yicr',
   authorEmail: 'yicr@users.noreply.github.com',
@@ -47,12 +48,6 @@ const project = new typescript.TypeScriptProject({
     },
   },
 });
-project.eslint?.addRules({
-  'max-len': ['error', {
-    code: 120,
-    ignoreUrls: true,
-    ignoreStrings: true,
-  }],
-});
+addEslintConfig(project);
 addDevContainer(project);
 project.synth();
