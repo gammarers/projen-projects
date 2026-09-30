@@ -1,9 +1,7 @@
 import {
   github,
-  IniFile,
   javascript,
   typescript,
-  type Project,
 } from 'projen';
 
 /**
@@ -20,6 +18,23 @@ export const sharedAuthor = {
 } as const;
 
 /**
+ * Maximum line length shared by EditorConfig and ESLint.
+ */
+export const sharedMaxLineLength = 120;
+
+/**
+ * Node.js versions shared by CI workflows and the Dev Container.
+ *
+ * `workflow` is the GitHub Actions `node-version` (`24.x`).
+ * `devcontainer` is the Dev Container Node feature version on that same major line.
+ */
+export const sharedNodeVersions = {
+  min: '20.0.0',
+  workflow: '24.x',
+  devcontainer: '24',
+} as const;
+
+/**
  * Opinionated defaults common to TypeScript and CDK construct library projects.
  *
  * Returns a new object on each call so nested workflow options are not shared
@@ -33,8 +48,8 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
   releaseToNpm: false,
   npmTrustedPublishing: false,
   npmAccess: javascript.NpmAccess.PUBLIC,
-  minNodeVersion: '20.0.0',
-  workflowNodeVersion: '24.x',
+  minNodeVersion: sharedNodeVersions.min,
+  workflowNodeVersion: sharedNodeVersions.workflow,
   depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],
@@ -58,24 +73,3 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
     ],
   },
 });
-
-/**
- * Adds the shared EditorConfig file to a project.
- */
-export const addEditorConfig = (project: Project): void => {
-  new IniFile(project, '.editorconfig', {
-    obj: {
-      'root': true,
-      '*': {
-        end_of_line: 'lf',
-        charset: 'utf-8',
-      },
-      '*.{js,ts}': {
-        indent_style: 'space',
-        indent_size: 2,
-        max_line_length: 120,
-      },
-    },
-    marker: true,
-  });
-};

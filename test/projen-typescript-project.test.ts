@@ -25,6 +25,38 @@ describe('ProjenTypeScriptProject', () => {
     expect(snapshot['package.json'].engines.node).toBe('>= 20.0.0');
     expect(snapshot['.editorconfig']).toContain('indent_size=2');
     expect(snapshot['.editorconfig']).toContain('max_line_length=120');
+    expect(snapshot['.eslintrc.json'].rules['max-len']).toEqual(['error', {
+      code: 120,
+      ignoreUrls: true,
+      ignoreStrings: true,
+    }]);
+    expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-typescript-project');
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/node:2']).toEqual({
+      version: '24',
+      npmVersion: '12',
+    });
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toBeUndefined();
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/python:1']).toBeUndefined();
+    expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/java:1']).toBeUndefined();
+    expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toBe(
+      'sudo chown -R $(whoami): /workspace && npm ci',
+    );
+    expect(snapshot['.devcontainer.json']).toBeUndefined();
+    expect(snapshot['.npmignore']).toContain('/.devcontainer');
+  });
+
+  test('names the devcontainer from a scoped package', () => {
+    const project = new ProjenTypeScriptProject({
+      name: '@example/scoped-project',
+      repositoryUrl: 'https://github.com/example/scoped-project.git',
+      devContainer: true,
+      outdir: createOutdir(),
+    });
+
+    const snapshot = Testing.synth(project);
+
+    expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-example-scoped-project');
+    expect(snapshot['.devcontainer.json']).toBeUndefined();
   });
 
   test('uses authorName when explicitly provided', () => {
