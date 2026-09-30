@@ -15,7 +15,8 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 - Shared author, Node (`>= 20`), TypeScript (`6.0.x`), and jsii (`6.0.x`, CDK libraries) settings
 - GitHub App credentials for workflow authentication
 - Weekly dependency upgrades with auto-approve / auto-merge labels
-- Generates a consistent `.editorconfig`
+- Generates a consistent `.editorconfig` and sets ESLint `max-len` to 120
+- Generates `.devcontainer/devcontainer.json` on Node 24, aligned with workflow Node `24.x`
 
 ## Installation
 
@@ -87,7 +88,7 @@ Optional highlights:
 
 | Option | Description |
 | --- | --- |
-| Other `AwsCdkConstructLibrary` options | Passed through and can override the built-in defaults |
+| Other `AwsCdkConstructLibrary` options | Passed through and can override the built-in defaults. `devContainer` stays `false` |
 
 Built-in defaults include author `yicr`, npm as the package manager, `releaseToNpm: false`,
 public npm access, workflow Node `24.x`, and GitHub App-based projen credentials.
@@ -101,8 +102,13 @@ public npm access, workflow Node `24.x`, and GitHub App-based projen credentials
 | `repositoryUrl` | `string` | Yes | Git repository URL (passed through as projen's `repository`) |
 
 Other `TypeScriptProject` options are passed through and can override the built-in defaults.
-The same author, Node, TypeScript, npm, and GitHub App defaults as `ProjenCdkConstructLibrary`
-apply (`jsiiVersion` is not set because this type is not a jsii project).
+`devContainer` stays `false`. The same author, Node, TypeScript, npm, and GitHub App defaults
+as `ProjenCdkConstructLibrary` apply (`jsiiVersion` is not set because this type is not a jsii project).
+
+Both types write `.devcontainer/devcontainer.json` and add `/.devcontainer` to `.npmignore`.
+CDK construct libraries also install the .NET, Python, and Java Dev Container features.
+After the container is created, it fixes ownership of the `node_modules` volume and runs the
+project's immutable install command (`npm ci` with the default package manager).
 
 ## Requirements
 
