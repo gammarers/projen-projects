@@ -30,6 +30,7 @@ describe('ProjenTypeScriptProject', () => {
       ignoreUrls: true,
       ignoreStrings: true,
     }]);
+    expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].execArgs).toContain('--silent');
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-typescript-project');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/node:2']).toEqual({
       version: '24',

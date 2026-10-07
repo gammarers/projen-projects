@@ -31,6 +31,7 @@ describe('ProjenCdkConstructLibrary', () => {
       ignoreUrls: true,
       ignoreStrings: true,
     }]);
+    expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].execArgs).toContain('--silent');
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-construct');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toEqual({});
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/python:1']).toEqual({});

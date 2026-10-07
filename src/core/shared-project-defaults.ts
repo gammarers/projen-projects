@@ -77,4 +77,8 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
       strict: true,
     },
   },
+  // --silent keeps console output from tests out of the Jest run.
+  jestOptions: {
+    extraCliOptions: ['--silent'],
+  },
 });
