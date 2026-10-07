@@ -69,9 +69,6 @@ export class ProjenCdkConstructLibrary extends awscdk.AwsCdkConstructLibrary {
       // },
       // gitignore: [...(options.gitignore || [])],
     });
-
-    // this.deps.addDependency(`projen@${PROJEN_VERSION}`, DependencyType.DEVENV);
-
     addEditorConfig(this);
     addEslintConfig(this);
     addDevContainer(this);

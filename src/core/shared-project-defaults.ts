@@ -72,4 +72,9 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
       sharedAuthor.name,
     ],
   },
+  tsconfigDev: {
+    compilerOptions: {
+      strict: true,
+    },
+  },
 });
