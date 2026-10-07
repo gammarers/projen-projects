@@ -17,6 +17,7 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 - Weekly dependency upgrades with auto-approve / auto-merge labels
 - Generates a consistent `.editorconfig` and sets ESLint `max-len` to 160
 - Runs Jest with `--silent` so test logs stay quiet
+- Enables TypeScript `strict` in the development tsconfig
 - Generates `.devcontainer/devcontainer.json` on Node 24, aligned with workflow Node `24.x`
 
 ## Installation

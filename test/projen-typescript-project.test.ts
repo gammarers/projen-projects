@@ -31,6 +31,7 @@ describe('ProjenTypeScriptProject', () => {
       ignoreStrings: true,
     }]);
     expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].execArgs).toContain('--silent');
+    expect(snapshot['test/tsconfig.json'].compilerOptions.strict).toBe(true);
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-typescript-project');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/node:2']).toEqual({
       version: '24',

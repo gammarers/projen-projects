@@ -72,6 +72,7 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
       sharedAuthor.name,
     ],
   },
+  // The development tsconfig typechecks tests with strict mode.
   tsconfigDev: {
     compilerOptions: {
       strict: true,
