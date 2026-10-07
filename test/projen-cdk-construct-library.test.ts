@@ -25,9 +25,9 @@ describe('ProjenCdkConstructLibrary', () => {
     expect(snapshot['package.json'].author.email).toBe('yicr@users.noreply.github.com');
     expect(snapshot['package.json'].engines.node).toBe('>= 20.0.0');
     expect(snapshot['.editorconfig']).toContain('indent_size=2');
-    expect(snapshot['.editorconfig']).toContain('max_line_length=120');
+    expect(snapshot['.editorconfig']).toContain('max_line_length=160');
     expect(snapshot['.eslintrc.json'].rules['max-len']).toEqual(['error', {
-      code: 120,
+      code: 160,
       ignoreUrls: true,
       ignoreStrings: true,
     }]);

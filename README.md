@@ -15,7 +15,7 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 - Shared author, Node (`>= 20`), TypeScript (`6.0.x`), and jsii (`6.0.x`, CDK libraries) settings
 - GitHub App credentials for workflow authentication
 - Weekly dependency upgrades with auto-approve / auto-merge labels
-- Generates a consistent `.editorconfig` and sets ESLint `max-len` to 120
+- Generates a consistent `.editorconfig` and sets ESLint `max-len` to 160
 - Generates `.devcontainer/devcontainer.json` on Node 24, aligned with workflow Node `24.x`
 
 ## Installation

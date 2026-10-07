@@ -20,7 +20,7 @@ export const sharedAuthor = {
 /**
  * Maximum line length shared by EditorConfig and ESLint.
  */
-export const sharedMaxLineLength = 120;
+export const sharedMaxLineLength = 160;
 
 /**
  * Node.js versions shared by CI workflows and the Dev Container.
