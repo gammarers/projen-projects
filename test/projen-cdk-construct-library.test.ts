@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
-import { Testing } from 'projen';
+import { Testing, awscdk } from 'projen';
 import { ProjenCdkConstructLibrary } from '../src';
 
 const createOutdir = () => fs.mkdtempSync(path.join(os.tmpdir(), 'projen-cdk-construct-library-'));
@@ -42,6 +42,49 @@ describe('ProjenCdkConstructLibrary', () => {
     );
     expect(snapshot['.devcontainer.json']).toBeUndefined();
     expect(snapshot['.npmignore']).toContain('/.devcontainer');
+    expect(Object.keys(snapshot).some((filePath) => filePath.endsWith('-function.ts'))).toBe(false);
+  });
+
+  test('bundles a discovered lambda with the shared runtime', () => {
+    const outdir = createOutdir();
+    fs.mkdirSync(path.join(outdir, 'src'), { recursive: true });
+    fs.writeFileSync(path.join(outdir, 'src', 'hello.lambda.ts'), 'export const handler = async () => {};\n');
+
+    const project = new ProjenCdkConstructLibrary({
+      name: 'test-construct',
+      repositoryUrl: 'https://github.com/example/test-construct.git',
+      cdkVersion: '2.170.0',
+      outdir,
+    });
+
+    const snapshot = Testing.synth(project);
+    const bundleArgs = JSON.stringify(snapshot['.projen/tasks.json']);
+
+    expect(snapshot['src/hello-function.ts']).toContain("new lambda.Runtime('nodejs24.x'");
+    expect(bundleArgs).toContain('--external:@aws-sdk/*');
+    expect(bundleArgs).toContain('--sourcemap');
+  });
+
+  test('replaces the shared lambda options when lambdaOptions is provided', () => {
+    const outdir = createOutdir();
+    fs.mkdirSync(path.join(outdir, 'src'), { recursive: true });
+    fs.writeFileSync(path.join(outdir, 'src', 'hello.lambda.ts'), 'export const handler = async () => {};\n');
+
+    const project = new ProjenCdkConstructLibrary({
+      name: 'test-construct',
+      repositoryUrl: 'https://github.com/example/test-construct.git',
+      cdkVersion: '2.170.0',
+      lambdaOptions: {
+        runtime: awscdk.LambdaRuntime.NODEJS_22_X,
+      },
+      outdir,
+    });
+
+    const snapshot = Testing.synth(project);
+    const bundleArgs = JSON.stringify(snapshot['.projen/tasks.json']);
+
+    expect(snapshot['src/hello-function.ts']).toContain("new lambda.Runtime('nodejs22.x'");
+    expect(bundleArgs).not.toContain('--sourcemap');
   });
 
   test('uses author when explicitly provided', () => {

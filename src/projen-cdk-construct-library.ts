@@ -2,6 +2,7 @@ import { awscdk } from 'projen';
 import { addDevContainer } from './core/devcontainer';
 import { addEditorConfig } from './core/editor-config';
 import { addEslintConfig } from './core/eslint-config';
+import { createSharedLambdaOptions } from './core/lambda-options';
 import { createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
 
 // export const PROJEN_VERSION = "~0.91.1";
@@ -35,7 +36,7 @@ export interface ProjenCdkConstructLibraryOptions extends Partial<
 
 /**
  * A projen project type for AWS CDK construct libraries with shared defaults
- * such as author, Node versions, GitHub app credentials, EditorConfig, ESLint, and a Dev Container.
+ * such as author, Node versions, GitHub app credentials, EditorConfig, ESLint, a Dev Container, and Lambda handler defaults.
  */
 export class ProjenCdkConstructLibrary extends awscdk.AwsCdkConstructLibrary {
 
@@ -51,6 +52,7 @@ export class ProjenCdkConstructLibrary extends awscdk.AwsCdkConstructLibrary {
       author: sharedAuthor.name,
       authorAddress: sharedAuthor.email,
       jsiiVersion: '6.0.x',
+      lambdaOptions: createSharedLambdaOptions(),
       ...options,
       devContainer: false,
       // release: true,
