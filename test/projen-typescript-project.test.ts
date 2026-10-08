@@ -40,9 +40,18 @@ describe('ProjenTypeScriptProject', () => {
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toBeUndefined();
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/python:1']).toBeUndefined();
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/java:1']).toBeUndefined();
-    expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toBe(
-      'sudo chown -R $(whoami): /workspace && npm ci',
+    expect(snapshot['.devcontainer/devcontainer.json'].workspaceMount).toBe(
+      'source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind',
     );
+    expect(snapshot['.devcontainer/devcontainer.json'].workspaceFolder).toBe('/workspace');
+    expect(snapshot['.devcontainer/devcontainer.json'].mounts).toEqual([
+      'target=${containerWorkspaceFolder}/node_modules',
+    ]);
+    expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toEqual({
+      fixVolumePermissions: 'sudo chown -R $(whoami): /workspace',
+      gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
+      installDependencies: 'npm ci',
+    });
     expect(snapshot['.devcontainer.json']).toBeUndefined();
     expect(snapshot['.npmignore']).toContain('/.devcontainer');
   });

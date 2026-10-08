@@ -112,8 +112,9 @@ as `ProjenCdkConstructLibrary` apply (`jsiiVersion` is not set because this type
 
 Both types write `.devcontainer/devcontainer.json` and add `/.devcontainer` to `.npmignore`.
 CDK construct libraries also install the .NET, Python, and Java Dev Container features.
-After the container is created, it fixes ownership of the `node_modules` volume and runs the
-project's immutable install command (`npm ci` with the default package manager).
+After the container is created, it fixes ownership of the `node_modules` volume, marks the
+workspace as a Git safe directory, and runs the project's immutable install command
+(`npm ci` with the default package manager).
 
 ## Requirements
 

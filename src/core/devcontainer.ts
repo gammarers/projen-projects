@@ -2,7 +2,6 @@ import { JsonFile, awscdk, javascript } from 'projen';
 import { sharedNodeVersions } from './shared-project-defaults';
 
 const devcontainerUser = 'developer';
-const devcontainerWorkspaceFolder = '/workspace';
 const devcontainerNpmVersion = '12';
 
 /**
@@ -20,16 +19,20 @@ const devcontainerName = (packageName: string): string => {
 };
 
 /**
- * Builds the command that runs once after the container is created.
+ * Builds the commands that run once after the container is created.
  *
- * Ownership of the anonymous `node_modules` volume is fixed first.
- * Install then runs in the same shell, using the project's package manager.
+ * Volume ownership is fixed, the workspace is marked as a Git safe directory,
+ * and the project dependencies are installed last.
+ * `${containerWorkspaceFolder}` stays in the Git command so Dev Containers expands it.
  *
  * @param installCommand - Immutable install command, such as `npm ci`.
- * @returns Shell command for `postCreateCommand`.
+ * @returns Named commands for `postCreateCommand`.
  */
-const postCreateCommand = (installCommand: string): string =>
-  `sudo chown -R $(whoami): ${devcontainerWorkspaceFolder} && ${installCommand}`;
+const postCreateCommand = (installCommand: string) => ({
+  fixVolumePermissions: 'sudo chown -R $(whoami): /workspace',
+  gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
+  installDependencies: installCommand,
+});
 
 /**
  * .NET, Python, and Java features used by jsii construct libraries.
@@ -90,10 +93,11 @@ export const addDevContainer = (project: javascript.NodeProject): void => {
       name: devcontainerName(project.name),
       image: 'mcr.microsoft.com/devcontainers/base:trixie',
       features: devcontainerFeatures(project),
-      workspaceMount: `source=\${localWorkspaceFolder},target=${devcontainerWorkspaceFolder},type=bind`,
-      workspaceFolder: devcontainerWorkspaceFolder,
+      workspaceMount: 'source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind',
+      // This value is what ${containerWorkspaceFolder} expands to.
+      workspaceFolder: '/workspace',
       mounts: [
-        `target=${devcontainerWorkspaceFolder}/node_modules`,
+        'target=${containerWorkspaceFolder}/node_modules',
       ],
       remoteUser: devcontainerUser,
       remoteEnv: {
