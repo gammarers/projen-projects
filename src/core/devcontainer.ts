@@ -31,6 +31,7 @@ const devcontainerName = (packageName: string): string => {
 const postCreateCommand = (installCommand: string) => ({
   fixVolumePermissions: 'sudo chown -R $(whoami): /workspace',
   gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
+  gitConfigCredentialHelper: 'git config --global credential.helper store',
   installDependencies: installCommand,
 });
 
