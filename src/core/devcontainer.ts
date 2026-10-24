@@ -1,4 +1,4 @@
-import { JsonFile, awscdk, javascript } from 'projen';
+import { JsonFile, cdk, javascript } from 'projen';
 import { sharedNodeVersions } from './shared-project-defaults';
 
 const devcontainerUser = 'developer';
@@ -47,7 +47,8 @@ const jsiiLanguageFeatures = {
 /**
  * Dev Container features for a project.
  *
- * CDK construct libraries include {@link jsiiLanguageFeatures} for jsii packaging.
+ * jsii projects (including CDK construct libraries) include
+ * {@link jsiiLanguageFeatures} for multi-language packaging.
  * Other Node projects keep the common, git, and Node.js features.
  *
  * @param project - Node project that receives the Dev Container.
@@ -66,7 +67,7 @@ const devcontainerFeatures = (project: javascript.NodeProject) => {
     },
   };
 
-  if (!(project instanceof awscdk.AwsCdkConstructLibrary)) {
+  if (!(project instanceof cdk.JsiiProject)) {
     return features;
   }
 
@@ -81,7 +82,7 @@ const devcontainerFeatures = (project: javascript.NodeProject) => {
  *
  * Writes `.devcontainer/devcontainer.json` and excludes that directory from the npm package.
  * Node.js matches {@link sharedNodeVersions}.
- * CDK construct libraries also install the .NET, Python, and Java features.
+ * jsii projects also install the .NET, Python, and Java features.
  *
  * @param project - Node project that receives the Dev Container.
  */

@@ -7,10 +7,11 @@ import {
 /**
  * Author identity shared by the opinionated project types.
  *
- * CDK construct libraries pass these as jsii's `author` and `authorAddress`.
+ * jsii projects (including CDK construct libraries) pass these as
+ * `author` and `authorAddress`.
  * TypeScript projects pass them as `authorName` and `authorEmail`.
  * Jsii copies `author` into `authorName` before merging options, so setting
- * `authorName` on a construct library would override a caller-supplied `author`.
+ * `authorName` on a jsii project would override a caller-supplied `author`.
  */
 export const sharedAuthor = {
   name: 'yicr',
@@ -35,7 +36,7 @@ export const sharedNodeVersions = {
 } as const;
 
 /**
- * Opinionated defaults common to TypeScript and CDK construct library projects.
+ * Opinionated defaults common to TypeScript, jsii, and CDK construct library projects.
  *
  * Returns a new object on each call so nested workflow options are not shared
  * across projects.
