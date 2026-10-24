@@ -36,6 +36,11 @@ export const sharedNodeVersions = {
 } as const;
 
 /**
+ * jsii compiler version range used by jsii and CDK construct library projects.
+ */
+export const sharedJsiiVersion = '6.0.x';
+
+/**
  * Opinionated defaults common to TypeScript, jsii, and CDK construct library projects.
  *
  * Returns a new object on each call so nested workflow options are not shared

@@ -2,7 +2,11 @@ import { cdk } from 'projen';
 import { addDevContainer } from './core/devcontainer';
 import { addEditorConfig } from './core/editor-config';
 import { addEslintConfig } from './core/eslint-config';
-import { createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
+import {
+  createSharedTypeScriptProjectDefaults,
+  sharedAuthor,
+  sharedJsiiVersion,
+} from './core/shared-project-defaults';
 
 /**
  * Options for {@link ProjenJsiiProject}.
@@ -42,7 +46,7 @@ export class ProjenJsiiProject extends cdk.JsiiProject {
       ...createSharedTypeScriptProjectDefaults(),
       author: sharedAuthor.name,
       authorAddress: sharedAuthor.email,
-      jsiiVersion: '6.0.x',
+      jsiiVersion: sharedJsiiVersion,
       ...options,
       devContainer: false,
     });
