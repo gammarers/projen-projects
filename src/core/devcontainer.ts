@@ -23,13 +23,13 @@ const devcontainerName = (packageName: string): string => {
  *
  * Volume ownership is fixed, the workspace is marked as a Git safe directory,
  * and the project dependencies are installed last.
- * `${containerWorkspaceFolder}` stays in the Git command so Dev Containers expands it.
+ * `${containerWorkspaceFolder}` stays in the chown and Git commands so Dev Containers expands it.
  *
  * @param installCommand - Immutable install command, such as `npm ci`.
  * @returns Named commands for `postCreateCommand`.
  */
 const postCreateCommand = (installCommand: string) => ({
-  fixVolumePermissions: 'sudo chown -R $(whoami): {containerWorkspaceFolder}',
+  fixVolumePermissions: 'sudo chown -R $(whoami): ${containerWorkspaceFolder}',
   gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
   gitConfigCredentialHelper: 'git config --global credential.helper store',
   installDependencies: installCommand,
