@@ -3,7 +3,11 @@ import { addDevContainer } from './core/devcontainer';
 import { addEditorConfig } from './core/editor-config';
 import { addEslintConfig } from './core/eslint-config';
 import { createSharedLambdaOptions } from './core/lambda-options';
-import { createSharedTypeScriptProjectDefaults, sharedAuthor } from './core/shared-project-defaults';
+import {
+  createSharedTypeScriptProjectDefaults,
+  sharedAuthor,
+  sharedJsiiVersion,
+} from './core/shared-project-defaults';
 
 // export const PROJEN_VERSION = "~0.91.1";
 
@@ -51,7 +55,7 @@ export class ProjenCdkConstructLibrary extends awscdk.AwsCdkConstructLibrary {
       ...createSharedTypeScriptProjectDefaults(),
       author: sharedAuthor.name,
       authorAddress: sharedAuthor.email,
-      jsiiVersion: '6.0.x',
+      jsiiVersion: sharedJsiiVersion,
       lambdaOptions: createSharedLambdaOptions(),
       ...options,
       devContainer: false,

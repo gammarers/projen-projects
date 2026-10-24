@@ -32,6 +32,14 @@ describe('ProjenCdkConstructLibrary', () => {
       ignoreStrings: true,
     }]);
     expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].execArgs).toContain('--silent');
+    expect(snapshot['package.json'].jest.coverageThreshold).toEqual({
+      global: {
+        branches: 95,
+        functions: 90,
+        lines: 100,
+        statements: 100,
+      },
+    });
     expect(snapshot['test/tsconfig.json'].compilerOptions.strict).toBe(true);
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-construct');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toEqual({});
@@ -44,7 +52,7 @@ describe('ProjenCdkConstructLibrary', () => {
       'target=${containerWorkspaceFolder}/node_modules',
     ]);
     expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toEqual({
-      fixVolumePermissions: 'sudo chown -R $(whoami): /workspace',
+      fixVolumePermissions: 'sudo chown -R $(whoami): {containerWorkspaceFolder}',
       gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
       gitConfigCredentialHelper: 'git config --global credential.helper store',
       installDependencies: 'npm ci',
