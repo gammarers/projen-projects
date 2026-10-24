@@ -79,7 +79,16 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
     },
   },
   // --silent keeps console output from tests out of the Jest run.
+  // coverageThreshold fails the suite when coverage falls below these floors.
   jestOptions: {
     extraCliOptions: ['--silent'],
+    jestConfig: {
+      coverageThreshold: {
+        branches: 95,
+        functions: 90,
+        lines: 100,
+        statements: 100,
+      },
+    },
   },
 });
