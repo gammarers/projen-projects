@@ -52,7 +52,7 @@ describe('ProjenCdkConstructLibrary', () => {
       'target=${containerWorkspaceFolder}/node_modules',
     ]);
     expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toEqual({
-      fixVolumePermissions: 'sudo chown -R $(whoami): /workspace',
+      fixVolumePermissions: 'sudo chown -R $(whoami): {containerWorkspaceFolder}',
       gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
       gitConfigCredentialHelper: 'git config --global credential.helper store',
       installDependencies: 'npm ci',
