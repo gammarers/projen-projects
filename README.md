@@ -138,8 +138,7 @@ as `ProjenCdkConstructLibrary` apply (`jsiiVersion` is not set because this type
 
 All three types write `.devcontainer/devcontainer.json` and add `/.devcontainer` to `.npmignore`.
 jsii projects (including CDK construct libraries) also install the .NET, Python, and Java
-Dev Container features. `remoteEnv` forwards the host's `GIT_COMMITTER_NAME` and
-`GIT_COMMITTER_EMAIL`. After the container is created, it fixes ownership of the
+Dev Container features. After the container is created, it fixes ownership of the
 `node_modules` volume, marks the workspace as a Git safe directory, and runs the project's
 immutable install command (`npm ci` with the default package manager).
 
