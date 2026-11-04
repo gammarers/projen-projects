@@ -36,6 +36,21 @@ const postCreateCommand = (installCommand: string) => ({
 });
 
 /**
+ * Environment variables set inside the Dev Container.
+ *
+ * Git committer identity is copied from the host.
+ * `${localEnv:NAME}` stays in the value so Dev Containers expands it on the host.
+ * An unset host variable arrives as an empty string.
+ *
+ * @returns Variables for `remoteEnv`.
+ */
+const remoteEnv = () => ({
+  npm_config_loglevel: 'error',
+  GIT_COMMITTER_NAME: '${localEnv:GIT_COMMITTER_NAME}',
+  GIT_COMMITTER_EMAIL: '${localEnv:GIT_COMMITTER_EMAIL}',
+});
+
+/**
  * .NET, Python, and Java features used by jsii construct libraries.
  */
 const jsiiLanguageFeatures = {
@@ -82,6 +97,7 @@ const devcontainerFeatures = (project: javascript.NodeProject) => {
  *
  * Writes `.devcontainer/devcontainer.json` and excludes that directory from the npm package.
  * Node.js matches {@link sharedNodeVersions}.
+ * Git committer name and email are forwarded from the host environment.
  * jsii projects also install the .NET, Python, and Java features.
  *
  * @param project - Node project that receives the Dev Container.
@@ -102,9 +118,7 @@ export const addDevContainer = (project: javascript.NodeProject): void => {
         'target=${containerWorkspaceFolder}/node_modules',
       ],
       remoteUser: devcontainerUser,
-      remoteEnv: {
-        npm_config_loglevel: 'error',
-      },
+      remoteEnv: remoteEnv(),
       postCreateCommand: postCreateCommand(project.package.installCommand),
     },
   });

@@ -20,7 +20,9 @@
   ],
   "remoteUser": "developer",
   "remoteEnv": {
-    "npm_config_loglevel": "error"
+    "npm_config_loglevel": "error",
+    "GIT_COMMITTER_NAME": "${localEnv:GIT_COMMITTER_NAME}",
+    "GIT_COMMITTER_EMAIL": "${localEnv:GIT_COMMITTER_EMAIL}"
   },
   "postCreateCommand": {
     "fixVolumePermissions": "sudo chown -R $(whoami): ${containerWorkspaceFolder}",

@@ -50,6 +50,11 @@ describe('ProjenJsiiProject', () => {
     expect(snapshot['.devcontainer/devcontainer.json'].mounts).toEqual([
       'target=${containerWorkspaceFolder}/node_modules',
     ]);
+    expect(snapshot['.devcontainer/devcontainer.json'].remoteEnv).toEqual({
+      npm_config_loglevel: 'error',
+      GIT_COMMITTER_NAME: '${localEnv:GIT_COMMITTER_NAME}',
+      GIT_COMMITTER_EMAIL: '${localEnv:GIT_COMMITTER_EMAIL}',
+    });
     expect(snapshot['.devcontainer/devcontainer.json'].postCreateCommand).toEqual({
       fixVolumePermissions: 'sudo chown -R $(whoami): ${containerWorkspaceFolder}',
       gitConfigSafeDirectory: 'git config --global --add safe.directory ${containerWorkspaceFolder}',
