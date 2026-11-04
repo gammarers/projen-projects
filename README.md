@@ -20,7 +20,7 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 - Runs Jest with `--silent` so test logs stay quiet
 - Enables TypeScript `strict` in the development tsconfig
 - Defaults discovered AWS Lambda handlers to Node.js 24, with `@aws-sdk/*` external and source maps
-- Generates `.devcontainer/devcontainer.json` on Node 24, aligned with workflow Node `24.x`
+- Generates `.devcontainer/devcontainer.json` on Node 26, aligned with workflow Node `26.x`
 
 ## Installation
 
@@ -108,7 +108,7 @@ Optional highlights:
 | Other `AwsCdkConstructLibrary` options | Passed through and can override the built-in defaults, including `lambdaOptions`. `devContainer` stays `false` |
 
 Built-in defaults include author `yicr`, npm as the package manager, `releaseToNpm: false`,
-public npm access, workflow Node `24.x`, and GitHub App-based projen credentials.
+public npm access, workflow Node `26.x`, and GitHub App-based projen credentials.
 Discovered Lambda handlers use Node.js 24, exclude `@aws-sdk/*` from the bundle, and emit source maps.
 Passing `lambdaOptions` replaces that default. A library with no Lambda handler is unchanged.
 
