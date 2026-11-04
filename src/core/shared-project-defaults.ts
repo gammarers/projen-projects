@@ -26,13 +26,13 @@ export const sharedMaxLineLength = 160;
 /**
  * Node.js versions shared by CI workflows and the Dev Container.
  *
- * `workflow` is the GitHub Actions `node-version` (`24.x`).
+ * `workflow` is the GitHub Actions `node-version` (`26.x`).
  * `devcontainer` is the Dev Container Node feature version on that same major line.
  */
 export const sharedNodeVersions = {
   min: '20.0.0',
-  workflow: '24.x',
-  devcontainer: '24',
+  workflow: '26.x',
+  devcontainer: '26',
 } as const;
 
 /**

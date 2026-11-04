@@ -42,7 +42,7 @@ describe('ProjenTypeScriptProject', () => {
     expect(snapshot['test/tsconfig.json'].compilerOptions.strict).toBe(true);
     expect(snapshot['.devcontainer/devcontainer.json'].name).toBe('dev-test-typescript-project');
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/node:2']).toEqual({
-      version: '24',
+      version: '26',
       npmVersion: '12',
     });
     expect(snapshot['.devcontainer/devcontainer.json'].features['ghcr.io/devcontainers/features/dotnet:1']).toBeUndefined();
