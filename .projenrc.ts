@@ -1,53 +1,21 @@
-import { javascript, github, typescript } from 'projen';
-import { addDevContainer } from './src/core/devcontainer';
-import { addEslintConfig } from './src/core/eslint-config';
-const project = new typescript.TypeScriptProject({
-  authorName: 'yicr',
-  authorEmail: 'yicr@users.noreply.github.com',
-  typescriptVersion: '6.0.x',
-  defaultReleaseBranch: 'main',
+import { javascript } from 'projen';
+import { ProjenTypeScriptProject } from './src';
+
+const project = new ProjenTypeScriptProject({
   name: '@gammarers/projen-projects',
-  packageManager: javascript.NodePackageManager.NPM,
-  projenrcTs: true,
-  repository: 'https://github.com/gammarers/projen-projects.git',
+  repositoryUrl: 'https://github.com/gammarers/projen-projects.git',
   deps: [
     'projen',
   ],
+  // This package is published. The shared default leaves npm release off.
   releaseToNpm: true,
   npmTrustedPublishing: true,
-  npmAccess: javascript.NpmAccess.PUBLIC,
-  minNodeVersion: '20.0.0',
-  workflowNodeVersion: '24.x',
   depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve', 'auto-merge'],
       schedule: javascript.UpgradeDependenciesSchedule.expressions(['11 5 * * SUN']),
     },
   },
-  githubOptions: {
-    projenCredentials: github.GithubCredentials.fromApp({
-      permissions: {
-        pullRequests: github.workflows.AppPermission.WRITE,
-        contents: github.workflows.AppPermission.WRITE,
-        workflows: github.workflows.AppPermission.WRITE,
-      },
-    }),
-  },
-  autoApproveOptions: {
-    allowedUsernames: [
-      'gammarers-projen-upgrade-bot[bot]',
-      'yicr',
-    ],
-  },
-  jestOptions: {
-    extraCliOptions: ['--silent'],
-  },
-  tsconfigDev: {
-    compilerOptions: {
-      strict: true,
-    },
-  },
 });
-addEslintConfig(project);
-addDevContainer(project);
+
 project.synth();
