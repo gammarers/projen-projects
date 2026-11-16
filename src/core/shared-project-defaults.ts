@@ -86,7 +86,9 @@ export const createSharedTypeScriptProjectDefaults = (): Partial<typescript.Type
   },
   // --silent keeps console output from tests out of the Jest run.
   // coverageThreshold fails the suite when coverage falls below these floors.
+  // experimentalVmModules lets Jest require() ESM-only dependencies such as projen's dax.
   jestOptions: {
+    experimentalVmModules: true,
     extraCliOptions: ['--silent'],
     jestConfig: {
       coverageThreshold: {

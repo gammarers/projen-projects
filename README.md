@@ -17,7 +17,7 @@ Opinionated [projen](https://projen.io/) project types for AWS CDK construct lib
 - GitHub App credentials for workflow authentication
 - Weekly dependency upgrades with auto-approve / auto-merge labels
 - Generates a consistent `.editorconfig` and sets ESLint `max-len` to 160
-- Runs Jest with `--silent` so test logs stay quiet
+- Runs Jest with `--silent` so test logs stay quiet, and with `--experimental-vm-modules` so tests can load ESM-only dependencies
 - Enables TypeScript `strict` in the development tsconfig
 - Defaults discovered AWS Lambda handlers to Node.js 24, with `@aws-sdk/*` external and source maps
 - Generates `.devcontainer/devcontainer.json` on Node 24, aligned with workflow Node `24.x`

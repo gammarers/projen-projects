@@ -31,6 +31,9 @@ describe('ProjenTypeScriptProject', () => {
       ignoreStrings: true,
     }]);
     expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].execArgs).toContain('--silent');
+    expect(snapshot['.projen/tasks.json'].tasks.test.steps[0].env).toEqual({
+      NODE_OPTIONS: '--experimental-vm-modules',
+    });
     expect(snapshot['package.json'].jest.coverageThreshold).toEqual({
       global: {
         branches: 95,
